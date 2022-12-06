@@ -9,8 +9,20 @@ import bodyParser from 'body-parser';
 import "./config/database.mjs";
 import { typeDefs } from './config/config.mjs';
 
-import { panelResolver, addPanelResolver, allPanelesResolver } from './controllers/PanelController.mjs';
-import { tareaResolver, addTareaResolver, allTareasResolver } from './controllers/TareasController.mjs';
+import {
+  panelResolver,
+  addPanelResolver,
+  allPanelesResolver,
+  updatePanelResolver,
+  deletePanelResolver,
+} from './controllers/PanelController.mjs';
+import {
+  tareaResolver,
+  addTareaResolver,
+  allTareasResolver,
+  updateTareaResolver,
+  deleteTareaResolver,
+} from './controllers/TareasController.mjs';
 
 // se crean los resolvers
 const resolvers ={
@@ -25,7 +37,12 @@ const resolvers ={
 
     Mutation:{
       addPanel: addPanelResolver,
+      updatePanel: updatePanelResolver,
+      deletePanel: deletePanelResolver,
+
       addTarea: addTareaResolver,
+      updateTarea: updateTareaResolver,
+      deleteTarea: deleteTareaResolver,
     }
 }
 

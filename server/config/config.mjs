@@ -33,9 +33,30 @@ type Mutation {
     fecha_fin: String,
     estado: Boolean
   ): Tarea
+  updateTarea(
+    _id: String,
+    idPanel: String,
+    titulo: String,
+    descripcion: String,
+    fecha_inicio: String,
+    fecha_fin: String,
+    estado: Boolean
+  ): Tarea
+  deleteTarea(
+    _id: String,
+  ): Tarea
+
   addPanel(
     titulo: String,
     descripcion: String,
+  ): Panel
+  updatePanel(
+    _id: String,
+    titulo: String,
+    descripcion: String,
+  ): Panel
+  deletePanel(
+    _id: String,
   ): Panel
 }
 `
