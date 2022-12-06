@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interfaz 2</title>
+
+  <link href="./../vendor/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-3 border-bottom border-primary">
+    <div class="container-fluid ">
+      <a class="navbar-brand" href="#">TO DO</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pages/index.html">Menú Principal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pages/interfaz2.html">Pag 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pages/interfaz3.html">Pag 3</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+
+
+    <div class="card m-5">
+      <div class="card-body">
+        <form class="row g-3 needs-validation" novalidate>
+          <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="validationCustom01" value="" required>
+            <div class="valid-feedback">
+              ¡Se ve bien!
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="validationCustom02" value="" required>
+            <div class="valid-feedback">
+              ¡Se ve bien!
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationCustomUsername" class="form-label">Nombre de usuario</label>
+            <div class="input-group has-validation">
+    
+              <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend"
+                required>
+              <div class="invalid-feedback">
+                Por favor, elije un nombre de usuario.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom03" class="form-label">País</label>
+            <input type="text" class="form-control" id="validationCustom03" required>
+            <div class="invalid-feedback">
+              Proporciona una ciudad válida.
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="validationCustom04" class="form-label">Ciudad</label>
+            <select class="form-select" id="validationCustom04" required>
+              <option selected disabled value="">Elige...</option>
+              <option>...</option>
+              <option>España</option>
+              <option>Portgual</option>
+              <option>Francia</option>
+              <option>Reino Unido</option>
+              <option>Alemania</option>
+              <option>Marruecos</option>
+              <option>Suiza</option>
+              <option>Holanda</option>
+              <option>Bélgica</option>
+              <option>Otro</option>
+            </select>
+            <div class="invalid-feedback">
+              Selecciona un estado válido.
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="validationCustom05" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="validationCustom05" required>
+            <div class="invalid-feedback">
+              Proporciona un código postal válido.
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+              <label class="form-check-label" for="invalidCheck">
+                Acepta los términos y condiciones
+              </label>
+              <div class="invalid-feedback">
+                Debe estar de acuerdo antes de enviar.
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit" onclick="index.html">Enviar formulario</button>
+            <button class="btn btn-danger" onclick="index.html">
+              <a href="index.html" style="color:aliceblue;" style="text-decoration: none">Salir</a>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+
+    <script src="./interfaz2.js"></script>
+
+</body>
+
+
+
+</html>
