@@ -36,7 +36,7 @@ function generateUUID() {
 }
 
 
-const createCard = (title, description) => {
+const createCard = (title, description, id) => {
   const card = document.createElement("div");
   const titleEl = document.createElement("h3");
   const descriptionEl = document.createElement("p");
@@ -61,7 +61,7 @@ const createCard = (title, description) => {
   card.appendChild(modifyBtn);
 
   card.className += "container-fluid cardbody";
-  card.id += generateUUID();
+  card.id += id || generateUUID();
   card.draggable += "true";
   card.ondragstart = (event) => handleDrag(event)
 
@@ -69,6 +69,9 @@ const createCard = (title, description) => {
     if (!confirm("Quieres eliminar la tarjeta?")) {
       return
     }
+
+    console.log('./window.ioAPI', window.ioAPI)
+    window.ioAPI.deleteTarea(id)
 
     card.remove()
   });
@@ -174,7 +177,7 @@ window.getAllTareas().then((res) => res.json()).then(({ data }) => {
 
   data.allTareas.forEach((tareaData) => {
     console.log('./panel', tareaData)
-    const tareaElement = createCard(tareaData.titulo, tareaData.descripcion)
+    const tareaElement = createCard(tareaData.titulo, tareaData.descripcion, tareaData._id)
 
     if (tareaData.estado === 'DOING') {
       document.getElementById(BOX2_CONTAINER).append(tareaElement)
