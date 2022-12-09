@@ -82,4 +82,4 @@ app.use(
 app.use('/', express.static('webapp'));
 
 await new Promise((resolve) => httpServer.listen({ port: 80 }, resolve));
-console.log(`🚀 Server ready at http://localhost:4000`);
+console.log(`🚀 Server ready at http://localhost:80`);
