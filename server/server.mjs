@@ -6,6 +6,9 @@ import http from 'http';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
+import { Server } from 'socket.io';
+
+
 import "./config/database.mjs";
 import { typeDefs } from './config/config.mjs';
 
@@ -24,30 +27,42 @@ import {
   deleteTareaResolver,
 } from './controllers/TareasController.mjs';
 
+
+
 // se crean los resolvers
-const resolvers ={
-    Query: { 
-      hello: () => 'world',
-      panel: panelResolver,
-      tarea: tareaResolver,
+const resolvers = {
+  Query: {
+    hello: () => 'world',
+    panel: panelResolver,
+    tarea: tareaResolver,
 
-      allPaneles: allPanelesResolver,
-      allTareas: allTareasResolver,
-    },
+    allPaneles: allPanelesResolver,
+    allTareas: allTareasResolver,
+  },
 
-    Mutation:{
-      addPanel: addPanelResolver,
-      updatePanel: updatePanelResolver,
-      deletePanel: deletePanelResolver,
+  Mutation: {
+    addPanel: addPanelResolver,
+    updatePanel: updatePanelResolver,
+    deletePanel: deletePanelResolver,
 
-      addTarea: addTareaResolver,
-      updateTarea: updateTareaResolver,
-      deleteTarea: deleteTareaResolver,
-    }
+    addTarea: addTareaResolver,
+    updateTarea: updateTareaResolver,
+    deleteTarea: deleteTareaResolver,
+  }
 }
 
 const app = express();
 const httpServer = http.createServer(app);
+
+const io = new Server(httpServer);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
 
 // Set up Apollo Server
 const server = new ApolloServer({
