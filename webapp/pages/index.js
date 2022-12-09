@@ -31,7 +31,19 @@ window.getAllPanels().then((res) => res.json()).then(({ data }) => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            onClick="(function(){
+                                window.deletePanel('${panelData._id}');
+
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
+                            })();"
+                        >
+                            Eliminar
+                        </button>
                     </div>
                     </div>
                 </div>
