@@ -1,17 +1,21 @@
 const socket = io();
 
-window.deleteTarea = (id) => {
-    socket.emit('deleteTarea', id);
-}
+class ioAPI {
+    static deleteTarea(id) {
+        socket.emit('deleteTarea', id);
+    }
 
-window.deletePanel = (id) => {
-    socket.emit('deletePanel', id);
-}
+    static deletePanel(id) {
+        socket.emit('deletePanel', id);
+    }
 
-window.modifyTarea = (id, tarea) => {
-    socket.emit('modifyTarea', { id, tarea });
-}
+    static modifyTarea(id, tarea) {
+        socket.emit('modifyTarea', { id, tarea });
+    }
 
-window.modifyPanel = (id, panel) => {
-    socket.emit('modifyPanel', { id, panel });
+    static modifyPanel(id, panel) {
+        socket.emit('modifyPanel', { id, panel });
+    }
 }
+console.log('./fdsafdsa')
+window.ioAPI = ioAPI;

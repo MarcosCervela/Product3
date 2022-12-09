@@ -59,6 +59,10 @@ const io = new Server(httpServer);
 io.on('connection', (socket) => {
   console.log('a user connected');
 
+  socket.on('deleteTarea', (tarea) => {
+    console.log('deleteTarea', tarea);
+  })
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
