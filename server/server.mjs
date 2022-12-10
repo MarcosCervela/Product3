@@ -63,6 +63,10 @@ io.on('connection', (socket) => {
     console.log('deleteTarea', id);
   })
 
+  socket.on('deletePanel', (id) => {
+    console.log('deletePanel', id);
+  })
+
   socket.on('modifyTarea', ({ id, tarea }) => {
     console.log('modifyTarea', { id, tarea });
   })
