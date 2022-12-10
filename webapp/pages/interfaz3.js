@@ -36,7 +36,9 @@ function generateUUID() {
 }
 
 
-const createCard = (title, description, id) => {
+const createCard = (title, description, previousId) => {
+  const id = previousId || generateUUID();
+
   const card = document.createElement("div");
   const titleEl = document.createElement("h3");
   const descriptionEl = document.createElement("p");
@@ -61,7 +63,7 @@ const createCard = (title, description, id) => {
   card.appendChild(modifyBtn);
 
   card.className += "container-fluid cardbody";
-  card.id += id || generateUUID();
+  card.id += id
   card.draggable += "true";
   card.ondragstart = (event) => handleDrag(event)
 
@@ -80,8 +82,14 @@ const createCard = (title, description, id) => {
     modalEdicionTarjetaTitleElement.value = title
     modalEdicionTarjetaDescriptionElement.value = description
     modalEdicionTarjetaModificarElement.onclick = () => {
-      titleEl.textContent = modalEdicionTarjetaTitleElement.value
-      descriptionEl.textContent = modalEdicionTarjetaDescriptionElement.value
+      const titleInputValue = modalEdicionTarjetaTitleElement.value
+      const descriptionInputValue = modalEdicionTarjetaDescriptionElement.value
+      titleEl.textContent = titleInputValue
+      descriptionEl.textContent = descriptionInputValue
+      window.ioAPI.modifyTarea(id, {
+        title: titleInputValue,
+        description: descriptionInputValue,
+      })
       modalEdicionTarjeta.hide()
     }
     modalEdicionTarjeta.show()
