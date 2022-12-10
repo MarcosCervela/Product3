@@ -4,9 +4,9 @@ window.getAllPanels().then((res) => res.json()).then(({ data }) => {
     console.log(data.allPaneles);
 
     data.allPaneles.forEach((panelData) => {
-        console.log('./panel', panelData)
         const panelElement = document.createElement('div');
         panelElement.classList.add('col-sm-3');
+
         panelElement.innerHTML = `
         <div class=" ">
             <div class="card">
@@ -35,11 +35,9 @@ window.getAllPanels().then((res) => res.json()).then(({ data }) => {
                             type="button"
                             class="btn btn-danger"
                             onClick="(function(){
-                                window.deletePanel('${panelData._id}');
+                                window.ioAPI.deletePanel('${panelData._id}');
 
-                                setTimeout(() => {
-                                    location.reload();
-                                }, 1000);
+                                location.reload();
                             })();"
                         >
                             Eliminar

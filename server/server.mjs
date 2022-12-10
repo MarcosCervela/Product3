@@ -59,9 +59,26 @@ const io = new Server(httpServer);
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  socket.on('deleteTarea', (tarea) => {
-    console.log('deleteTarea', tarea);
+
+  // panels
+  socket.on('deletePanel', (id) => {
+    console.log('deletePanel', id);
   })
+
+
+  // tareas
+  socket.on('addTarea', (id, tarea) => {
+    console.log('addTarea', id, tarea);
+  })
+
+  socket.on('deleteTarea', (id) => {
+    console.log('deleteTarea', id);
+  })
+
+  socket.on('modifyTarea', ({ id, tarea }) => {
+    console.log('modifyTarea', { id, tarea });
+  })
+
 
   socket.on('disconnect', () => {
     console.log('user disconnected');

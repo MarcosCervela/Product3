@@ -1,6 +1,10 @@
 const socket = io();
 
 class ioAPI {
+    static addTarea(id, tarea) {
+        socket.emit('addTarea', { id, tarea });
+    }
+
     static deleteTarea(id) {
         socket.emit('deleteTarea', id);
     }
@@ -17,5 +21,5 @@ class ioAPI {
         socket.emit('modifyPanel', { id, panel });
     }
 }
-console.log('./fdsafdsa')
-window.ioAPI = ioAPI;
+
+window.ioAPI = ioAPI
