@@ -6,6 +6,7 @@ type Tarea {
   fecha_inicio: String
   fecha_fin: String
   estado: Boolean
+  panelId: String
 }
 type Panel {
   _id: String
@@ -31,7 +32,8 @@ type Mutation {
     descripcion: String,
     fecha_inicio: String,
     fecha_fin: String,
-    estado: Boolean
+    estado: Boolean,
+    panelId: String
   ): Tarea
   updateTarea(
     _id: String,
@@ -40,7 +42,8 @@ type Mutation {
     descripcion: String,
     fecha_inicio: String,
     fecha_fin: String,
-    estado: Boolean
+    estado: Boolean,
+    panelId: String
   ): Tarea
   deleteTarea(
     _id: String,
