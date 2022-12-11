@@ -61,6 +61,10 @@ io.on('connection', (socket) => {
 
 
   // panels
+  socket.on('addPanel', (panel) => {
+    console.log('addPanel', panel);
+  })
+
   socket.on('deletePanel', (id) => {
     console.log('deletePanel', id);
   })

@@ -8,6 +8,7 @@
   <title>Interfaz 2</title>
 
   <link href="./../vendor/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 </head>
 
 <body>
@@ -45,17 +46,17 @@
 
     <div class="card m-5">
       <div class="card-body">
-        <form class="row g-3 needs-validation" novalidate>
+        <form id="form" class="row g-3 needs-validation" novalidate>
           <div class="col-md-4">
-            <label for="validationCustom01" class="form-label" id="tituloPanel">Título</label>
-            <input type="text" class="form-control" id="validationCustom01" value="" required>
+            <label for="title" class="form-label">Título</label>
+            <input type="text" class="form-control" id="title" value="" required autofocus>
             <div class="valid-feedback">
               ¡Se ve bien!
             </div>
           </div>
           <div class="col-md-4">
-            <label for="validationCustom02" class="form-label" id="descriptionPanel">Descripción</label>
-            <input type="text" class="form-control" id="validationCustom02" value="" required>
+            <label for="description" class="form-label">Descripción</label>
+            <input type="text" class="form-control" id="description" value="" required>
             <div class="valid-feedback">
               ¡Se ve bien!
             </div>
@@ -72,7 +73,7 @@
             </div>
           </div>
           <div class="col-12">
-            <button class="btn btn-primary" type="submit" onclick="index.html">Enviar formulario</button>
+            <button class="btn btn-primary" type="submit">Añadir panel</button>
             <button class="btn btn-danger" onclick="index.html">
               <a href="index.html" style="color:aliceblue;" style="text-decoration: none">Salir</a>
             </button>
@@ -82,10 +83,7 @@
     </div>
 
 
-
-
-
-
+    <script src="./../assets/js/io-api.js"></script>
     <script src="./interfaz2.js"></script>
 
 </body>
