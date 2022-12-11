@@ -8,8 +8,6 @@ import bodyParser from 'body-parser';
 
 import { Server } from 'socket.io';
 
-import { v4 as uuidV4 } from 'uuid';
-
 
 import "./config/database.mjs";
 import { typeDefs } from './config/config.mjs';
@@ -84,6 +82,7 @@ io.on('connection', (socket) => {
       _id: id,
       titulo: tarea.title,
       descripcion: tarea.description,
+      panelId: tarea.panelId,
     })
   })
 

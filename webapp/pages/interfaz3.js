@@ -1,3 +1,5 @@
+const panelId = /id=(.*)/.exec(window.location.search)[1]
+
 const COLUMN_CLASS = 'columna'
 
 const modalEdicionTarjeta = new bootstrap.Modal('#modal-edicion-tarjeta')
@@ -28,7 +30,8 @@ const createCard = (title, description, previousId) => {
   const id = previousId || new Date().getTime();
 
   if (!previousId) {
-    window.ioAPI.addTarea(id, { title, description })
+    console.log('./panelId', panelId)
+    window.ioAPI.addTarea(id, { title, description, panelId })
   }
 
   const card = document.createElement("div");
@@ -170,12 +173,10 @@ const BOX1_CONTAINER = 'box1'
 const BOX2_CONTAINER = 'box2'
 const BOX3_CONTAINER = 'box3'
 
-const panelId = /id=(.*)/.exec(window.location.search)[1]
-
 window.getAllTareas().then((res) => res.json()).then(({ data }) => {
   console.log('data.allTareas', data.allTareas);
 
-  data.allTareas.forEach((tareaData) => {
+  data.allTareas.filter(({ panelId: tareaPanelId }) => tareaPanelId === panelId).forEach((tareaData) => {
     console.log('./panel', tareaData)
     const tareaElement = createCard(tareaData.titulo, tareaData.descripcion, tareaData._id)
 
