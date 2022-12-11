@@ -1,6 +1,25 @@
 const socket = io();
 
 class ioAPI {
+    static init() {
+        ioAPI.onTaskNotification()
+        ioAPI.onError()
+    }
+
+    static onTaskNotification() {
+        socket.on('taskNotification', (message) => {
+            console.log('./taskNotification', message);
+            alertify.success(message);
+        });
+    }
+
+    static onError() {
+        socket.on('error', (message) => {
+            console.log('./server error', message);
+            alertify.error(`server error: ${message}`);
+        });
+    }
+
     static addTarea(id, tarea) {
         socket.emit('addTarea', { id, tarea });
     }
@@ -25,5 +44,7 @@ class ioAPI {
         socket.emit('modifyPanel', { id, panel });
     }
 }
+
+ioAPI.init()
 
 window.ioAPI = ioAPI
