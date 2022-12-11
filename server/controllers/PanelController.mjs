@@ -9,7 +9,7 @@ export const allPanelesResolver = async (root, args) => {
 }
 
 export const addPanelResolver = (root, args) => {
-  const panel = new Panel({...args})
+  const panel = new Panel({ ...args })
   return panel.save()
 }
 
@@ -22,7 +22,7 @@ export const updatePanelResolver = async (root, args) => {
 }
 
 export const deletePanelResolver = async (root, args) => {
-  const panel = await (Panel.findById(args._id).exec())
+  const panel = await Panel.findById(args._id)
 
   return panel.delete()
 }
