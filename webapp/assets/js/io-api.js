@@ -24,6 +24,12 @@ class ioAPI {
         socket.emit('addTarea', { id, tarea });
     }
 
+    static uploadTareaFile(file, fileName) {
+        socket.emit('uploadTareaFile', { file, fileName }, (status) => {
+            console.log('./status', status);
+        });
+    }
+
     static deleteTarea(id) {
         socket.emit('deleteTarea', id);
     }
