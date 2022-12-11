@@ -4,6 +4,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
+import { writeFile } from "fs";
 import bodyParser from 'body-parser';
 
 import { Server } from 'socket.io';
@@ -110,6 +111,20 @@ io.on('connection', (socket) => {
         panelId: tarea.panelId,
       })
       notifyTaskNotification('tarea agregada')
+    } catch (error) {
+      notifyError(error.toString())
+    }
+  })
+
+  socket.on('uploadTareaFile', ({ file, fileName }, callback) => {
+    console.log('uploadTareaFile', file);
+
+    try {
+      writeFile(`./webapp/tmp/upload/${fileName}`, file, (err) => {
+        callback({ message: err ? `failure ${err.toString()}}` : "success" });
+      })
+
+      notifyTaskNotification('archivo subido')
     } catch (error) {
       notifyError(error.toString())
     }
