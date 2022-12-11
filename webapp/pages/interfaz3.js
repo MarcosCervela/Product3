@@ -37,11 +37,11 @@ function generateUUID() {
 
 
 const createCard = (title, description, previousId) => {
-  if (!previousId) {
-    window.ioAPI.addTarea(previousId, { title, description })
-  }
-
   const id = previousId || generateUUID();
+
+  if (!previousId) {
+    window.ioAPI.addTarea(id, { title, description })
+  }
 
   const card = document.createElement("div");
   const titleEl = document.createElement("h3");
