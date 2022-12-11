@@ -8,6 +8,8 @@ import bodyParser from 'body-parser';
 
 import { Server } from 'socket.io';
 
+import { v4 as uuidV4 } from 'uuid';
+
 
 import "./config/database.mjs";
 import { typeDefs } from './config/config.mjs';
@@ -63,20 +65,30 @@ io.on('connection', (socket) => {
   // panels
   socket.on('addPanel', (panel) => {
     console.log('addPanel', panel);
+    addPanelResolver(null, {
+      _id: +(new Date()),
+      titulo: panel.title,
+      descripcion: panel.description,
+    })
   })
 
   socket.on('deletePanel', (id) => {
-    console.log('deletePanel', id);
+    deletePanelResolver(null, { _id: id })
   })
 
 
   // tareas
-  socket.on('addTarea', (id, tarea) => {
-    console.log('addTarea', id, tarea);
+  socket.on('addTarea', ({ id, tarea }) => {
+    addTareaResolver(null, {
+      _id: id,
+      titulo: tarea.title,
+      descripcion: tarea.description,
+    })
   })
 
   socket.on('deleteTarea', (id) => {
     console.log('deleteTarea', id);
+    deleteTareaResolver(null, { _id: id })
   })
 
   socket.on('modifyTarea', ({ id, tarea }) => {
