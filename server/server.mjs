@@ -79,6 +79,7 @@ io.on('connection', (socket) => {
 
   // tareas
   socket.on('addTarea', ({ id, tarea }) => {
+    console.log('addTarea', { id, tarea });
     addTareaResolver(null, {
       _id: id,
       titulo: tarea.title,
@@ -93,6 +94,11 @@ io.on('connection', (socket) => {
 
   socket.on('modifyTarea', ({ id, tarea }) => {
     console.log('modifyTarea', { id, tarea });
+    updateTareaResolver(null, {
+      _id: id,
+      titulo: tarea.title,
+      descripcion: tarea.description,
+    })
   })
 
 
