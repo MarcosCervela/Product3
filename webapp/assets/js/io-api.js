@@ -9,6 +9,10 @@ class ioAPI {
         socket.emit('deleteTarea', id);
     }
 
+    static addPanel(panel) {
+        socket.emit('addPanel', panel);
+    }
+
     static deletePanel(id) {
         socket.emit('deletePanel', id);
     }
