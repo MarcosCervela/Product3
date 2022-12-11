@@ -1,6 +1,10 @@
+const panelId = /id=(.*)/.exec(window.location.search)[1]
+
 const COLUMN_CLASS = 'columna'
 
 const modalEdicionTarjeta = new bootstrap.Modal('#modal-edicion-tarjeta')
+const modalEdicionTarjetaForm = document.getElementById('edicion-tarjeta-form')
+
 const modalEdicionTarjetaTitleElement = document.getElementById('modal-edicion-tarjeta-title')
 const modalEdicionTarjetaDescriptionElement = document.getElementById('modal-edicion-tarjeta-description')
 const modalEdicionTarjetaModificarElement = document.getElementById('modal-edicion-tarjeta-modificar')
@@ -24,24 +28,13 @@ function handleDrop(event) {
 }
 
 
-//Generador de IDs
-function generateUUID() {
-  var d = new Date().getTime();
-  var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = (d + Math.random() * 16) % 16 | 0;
-    d = Math.floor(d / 16);
-    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-  });
-  return uuid;
-}
-
-
 const createCard = (title, description, previousId) => {
-  if (!previousId) {
-    window.ioAPI.addTarea(previousId, { title, description })
-  }
+  const id = previousId || new Date().getTime();
 
-  const id = previousId || generateUUID();
+  if (!previousId) {
+    console.log('./panelId', panelId)
+    window.ioAPI.addTarea(id, { title, description, panelId })
+  }
 
   const card = document.createElement("div");
   const titleEl = document.createElement("h3");
@@ -85,15 +78,26 @@ const createCard = (title, description, previousId) => {
   modifyBtn.addEventListener("click", () => {
     modalEdicionTarjetaTitleElement.value = title
     modalEdicionTarjetaDescriptionElement.value = description
+
     modalEdicionTarjetaModificarElement.onclick = () => {
-      const titleInputValue = modalEdicionTarjetaTitleElement.value
-      const descriptionInputValue = modalEdicionTarjetaDescriptionElement.value
+      const formData = new FormData(modalEdicionTarjetaForm)
+      console.log('./formData', formData, formData.get('file'))
+
+      const titleInputValue = formData.get('title')
+      const descriptionInputValue = formData.get('description')
+      const fileInputValue = formData.get('file')
+
       titleEl.textContent = titleInputValue
       descriptionEl.textContent = descriptionInputValue
+
       window.ioAPI.modifyTarea(id, {
         title: titleInputValue,
         description: descriptionInputValue,
+        fileName: fileInputValue.name,
       })
+
+      window.ioAPI.uploadTareaFile(fileInputValue, fileInputValue.name)
+
       modalEdicionTarjeta.hide()
     }
     modalEdicionTarjeta.show()
@@ -182,12 +186,10 @@ const BOX1_CONTAINER = 'box1'
 const BOX2_CONTAINER = 'box2'
 const BOX3_CONTAINER = 'box3'
 
-const panelId = /id=(.*)/.exec(window.location.search)[1]
-
 window.getAllTareas().then((res) => res.json()).then(({ data }) => {
   console.log('data.allTareas', data.allTareas);
 
-  data.allTareas.forEach((tareaData) => {
+  data.allTareas.filter(({ panelId: tareaPanelId }) => tareaPanelId === panelId).forEach((tareaData) => {
     console.log('./panel', tareaData)
     const tareaElement = createCard(tareaData.titulo, tareaData.descripcion, tareaData._id)
 

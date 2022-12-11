@@ -8,10 +8,12 @@
   <title>Interfaz 3</title>
   <link href="./../vendor/css/bootstrap.min.css" rel="stylesheet">
   <link href="./../assets/css/styles.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.min.css" rel="stylesheet">
   <script src="./../assets/js/app.js"></script>
   <script src="./../vendor/js/bootstrap.bundle.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js"></script>
 </head>
 
 </body>
@@ -30,10 +32,10 @@
           <a class="nav-link" href="/pages/index.html">Menú Principal</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/pages/interfaz2.html">Pag 2</a>
+          <a class="nav-link disabled" href="/pages/interfaz2.html">Pag 2</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/pages/interfaz3.html">Pag 3</a>
+          <a class="nav-link disabled" href="/pages/interfaz3.html">Pag 3</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
@@ -80,9 +82,12 @@
                   placeholder="Descripción">
               </div>
               <div class="mb-3">
-                <label for="file_uploads">Choose files to upload</label>
-                <input type="file" class="form-control" name="uploadfile" id="uploadfile"
-                  placeholder="uploadfile" accept="">
+                <<<<<<< HEAD <label for="file_uploads">Choose files to upload</label>
+                  <input type="file" class="form-control" name="uploadfile" id="uploadfile" placeholder="uploadfile"
+                    accept="">
+                  =======
+                  <input type="file" class="form-control" name="file" id="recipient-descrip3">
+                  >>>>>>> cfdae78 (file upload - on tarea modification)
               </div>
             </form>
           </div>
@@ -133,9 +138,12 @@
                   placeholder="Descripción">
               </div>
               <div class="mb-3">
-                <label for="file_uploads">Choose files to upload</label>
-                <input type="file" class="form-control" name="uploadfile" id="uploadfile"
-                  placeholder="uploadfile" accept="">
+                <<<<<<< HEAD <label for="file_uploads">Choose files to upload</label>
+                  <input type="file" class="form-control" name="uploadfile" id="uploadfile" placeholder="uploadfile"
+                    accept="">
+                  =======
+                  <input type="file" class="form-control" name="file" id="recipient-descrip3">
+                  >>>>>>> cfdae78 (file upload - on tarea modification)
               </div>
             </form>
           </div>
@@ -185,9 +193,7 @@
                   placeholder="Descripción">
               </div>
               <div class="mb-3">
-                <label for="file_uploads">Choose files to upload</label>
-                <input type="file" class="form-control" name="uploadfile" id="uploadfile"
-                  placeholder="uploadfile" accept="">
+                <input type="file" class="form-control" name="file" id="recipient-descrip3">
               </div>
             </form>
           </div>
@@ -222,7 +228,7 @@
 
         <!--  Modal body -->
         <div class="modal-body">
-          <form>
+          <form id="edicion-tarjeta-form">
             <div class="mb-3">
               <input type="text" class="form-control" name="title" id="modal-edicion-tarjeta-title"
                 placeholder="Título">
@@ -232,9 +238,8 @@
                 placeholder="Descripción">
             </div>
             <div class="mb-3">
-              <label for="file_uploads">Choose files to upload</label>
-              <input type="file" class="form-control" name="file" id="uploadfile"
-                placeholder="file" accept="">
+              <input type="file" class="form-control" name="file" id="recipient-descrip3">
+              Max 1mb
             </div>
           </form>
         </div>
