@@ -177,8 +177,8 @@ app.use(
   expressMiddleware(server),
 );
 
-//app.use('/', express.static('webapp'));
-app.use('/webapp', express.static(path.join(__dirname, 'webapp')))
+app.use('/webapp', express.static('webapp'));
+//app.use('/webapp', express.static(path.join(__dirname, 'webapp')))
 
 await new Promise((resolve) => httpServer.listen({ port: 2000 }, resolve));
 console.log(`🚀 Server ready at http://localhost:2000`);
