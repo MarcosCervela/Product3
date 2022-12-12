@@ -109,6 +109,7 @@ io.on('connection', (socket) => {
         titulo: tarea.title,
         descripcion: tarea.description,
         panelId: tarea.panelId,
+        fileName: tarea.fileName,
       })
       notifyTaskNotification('tarea agregada')
     } catch (error) {
@@ -149,6 +150,7 @@ io.on('connection', (socket) => {
         _id: id,
         titulo: tarea.title,
         descripcion: tarea.description,
+        fileName: tarea.fileName,
       })
       notifyTaskNotification('tarea modificada')
     } catch (error) {

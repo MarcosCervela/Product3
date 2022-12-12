@@ -21,6 +21,7 @@ class ioAPI {
     }
 
     static addTarea(id, tarea) {
+        console.log('./tarea', tarea)
         socket.emit('addTarea', { id, tarea });
     }
 

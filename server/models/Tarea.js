@@ -12,6 +12,7 @@ const TareaSchema = new Schema({
     fecha_fin: { type: Date },
     estado: Boolean,
     panelId: String,
+    fileName: String,
 });
 
 const Tarea = mongoose.model('Tarea', TareaSchema);

@@ -28,21 +28,48 @@ function handleDrop(event) {
 }
 
 
-const createCard = (title, description, previousId) => {
+const createCard = ({
+  title,
+  description,
+  file,
+  fileName,
+  previousId
+}) => {
   const id = previousId || new Date().getTime();
 
   if (!previousId) {
-    console.log('./panelId', panelId)
-    window.ioAPI.addTarea(id, { title, description, panelId })
+    window.ioAPI.addTarea(
+      id,
+      {
+        title,
+        description,
+        panelId,
+        fileName: file?.name,
+      }
+    )
+
+    if (file) {
+      window.ioAPI.uploadTareaFile(file, file?.name)
+    }
   }
 
   const card = document.createElement("div");
   const titleEl = document.createElement("h3");
   const descriptionEl = document.createElement("p");
+  const fileNameContainerEl = document.createElement("div");
+  const fileNameEl = document.createElement("a");
   const deleteBtn = document.createElement("button");
   const modifyBtn = document.createElement("button");
 
+  fileNameContainerEl.appendChild(fileNameEl)
+
   titleEl.textContent = title;
+  descriptionEl.textContent = description;
+  if (fileName) {
+    fileNameEl.href = `/tmp/upload/${fileName}`
+    fileNameEl.target = "_blank"
+    fileNameEl.textContent = fileName
+  }
   descriptionEl.textContent = description;
 
   //Boton Eliminar
@@ -56,6 +83,7 @@ const createCard = (title, description, previousId) => {
 
   card.appendChild(titleEl);
   card.appendChild(descriptionEl);
+  card.appendChild(fileNameContainerEl);
   card.appendChild(deleteBtn);
   card.appendChild(modifyBtn);
 
@@ -89,6 +117,9 @@ const createCard = (title, description, previousId) => {
 
       titleEl.textContent = titleInputValue
       descriptionEl.textContent = descriptionInputValue
+      fileNameEl.textContent = fileInputValue.name
+      fileNameEl.href = `/tmp/upload/${fileInputValue.name}`
+      fileNameEl.target = "_blank"
 
       window.ioAPI.modifyTarea(id, {
         title: titleInputValue,
@@ -96,7 +127,9 @@ const createCard = (title, description, previousId) => {
         fileName: fileInputValue.name,
       })
 
-      window.ioAPI.uploadTareaFile(fileInputValue, fileInputValue.name)
+      if (fileInputValue) {
+        window.ioAPI.uploadTareaFile(fileInputValue, fileInputValue.name)
+      }
 
       modalEdicionTarjeta.hide()
     }
@@ -108,44 +141,54 @@ const createCard = (title, description, previousId) => {
 
 const addBtnTODO = document.getElementById("btnAddCard1");
 
-const addPanelModalTitleTODO = document.getElementById("recipient-title1");
-const addPanelDescriptionTODO = document.getElementById("recipient-descrip1");
+const formAddTODO = document.getElementById("form-add-todo");
 const cardContainerTODO = document.getElementById("card-container1");
 
 addBtnTODO.addEventListener("click", (e) => {
   e.preventDefault();
 
-  const title = addPanelModalTitleTODO.value;
-  const description = addPanelDescriptionTODO.value;
+  const formData = new FormData(formAddTODO)
+  const title = formData.get('title')
+  const description = formData.get('description')
+  const file = formData.get('file')
 
   if (title === "" || description === "") {
     return
   }
 
-  const card = createCard(title, description);
+  const card = createCard({
+    title,
+    description,
+    file,
+    fileName: file.name,
+  });
   cardContainerTODO.appendChild(card);
 });
 
 
 const addBtnDOING = document.getElementById("btnAddCard2");
 
-const addPanelModalTitleDOING = document.getElementById("recipient-title2");
-const addPanelDescriptionDOING = document.getElementById("recipient-descrip2");
+const formAddDOING = document.getElementById("form-add-doing");
 const cardContainerDOING = document.getElementById("card-container2");
-
-
 
 addBtnDOING.addEventListener("click", (e) => {
   e.preventDefault();
 
-  const title = addPanelModalTitleDOING.value;
-  const description = addPanelDescriptionDOING.value;
+  const formData = new FormData(formAddDOING)
+  const title = formData.get('title')
+  const description = formData.get('description')
+  const file = formData.get('file')
 
   if (title === "" || description === "") {
     return
   }
 
-  const card = createCard(title, description);
+  const card = createCard({
+    title,
+    description,
+    file,
+    fileName: file.name,
+  });
   cardContainerDOING.appendChild(card);
 });
 
@@ -158,23 +201,29 @@ addBtnDOING.addEventListener("click", (e) => {
 
 const addBtnDONE = document.getElementById("btnAddCard3");
 
-const addPanelModalTitleDONE = document.getElementById("recipient-title3");
-const addPanelDescriptionDONE = document.getElementById("recipient-descrip3");
+const formAddDONE = document.getElementById("form-add-done");
 const cardContainerDONE = document.getElementById("card-container3");
 
 
 addBtnDONE.addEventListener("click", (e) => {
   e.preventDefault();
 
-  const title = addPanelModalTitleDOING.value;
-  const description = addPanelDescriptionDOING.value;
+  const formData = new FormData(formAddDONE)
+  const title = formData.get('title')
+  const description = formData.get('description')
+  const file = formData.get('file')
 
   if (title === "" || description === "") {
     return
   }
 
-  const card = createCard(title, description);
-  cardContainerDOING.appendChild(card);
+  const card = createCard({
+    title,
+    description,
+    file,
+    fileName: file.name,
+  });
+  cardContainerDONE.appendChild(card);
 });
 
 
@@ -191,7 +240,12 @@ window.getAllTareas().then((res) => res.json()).then(({ data }) => {
 
   data.allTareas.filter(({ panelId: tareaPanelId }) => tareaPanelId === panelId).forEach((tareaData) => {
     console.log('./panel', tareaData)
-    const tareaElement = createCard(tareaData.titulo, tareaData.descripcion, tareaData._id)
+    const tareaElement = createCard({
+      title: tareaData.titulo,
+      description: tareaData.descripcion,
+      fileName: tareaData.fileName,
+      previousId: tareaData._id
+    })
 
     if (tareaData.estado === 'DOING') {
       document.getElementById(BOX2_CONTAINER).append(tareaElement)
