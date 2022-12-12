@@ -179,5 +179,5 @@ app.use(
 
 app.use('/', express.static('webapp'));
 
-await new Promise((resolve) => httpServer.listen({ port: 80 }, resolve));
-console.log(`🚀 Server ready at http://localhost:80`);
+await new Promise((resolve) => httpServer.listen({ port: 2000 }, resolve));
+console.log(`🚀 Server ready at http://localhost:2000`);
