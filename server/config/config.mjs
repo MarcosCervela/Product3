@@ -7,6 +7,7 @@ type Tarea {
   fecha_fin: String
   estado: Boolean
   panelId: String
+  fileName: String
 }
 type Panel {
   _id: String
@@ -34,6 +35,7 @@ type Mutation {
     fecha_fin: String,
     estado: Boolean,
     panelId: String
+    fileName: String
   ): Tarea
   updateTarea(
     _id: String,
